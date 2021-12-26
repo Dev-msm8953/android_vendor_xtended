@@ -106,6 +106,10 @@ else ifeq ($(CRYSTAL_PURITY),MGAPPS)
     $(call inherit-product, vendor/gapps/gapps_mini.mk)
 endif
 
+# Hide nav Overlays
+PRODUCT_PACKAGES += \
+    NavigationBarModeGesturalOverlayFS 
+
 # Bootanimation
 include vendor/crystal/config/bootanimation.mk
 
