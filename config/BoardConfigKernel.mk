@@ -70,20 +70,21 @@ TARGET_KERNEL_VERSION ?= $(shell echo $(KERNEL_VERSION)"."$(KERNEL_PATCHLEVEL))
 
 TARGET_KERNEL_HEADERS ?= $(TARGET_KERNEL_SOURCE)
 
-ifneq ($(TARGET_CLANG_PREBUILTS_VERSION),)
-    ifeq ($(TARGET_CLANG_PREBUILTS_VERSION),latest)
+ifneq ($(TARGET_CLANG_LATEST_CLANG_VERSION),)
+    ifeq ($(TARGET_LATEST_CLANG_VERSION),latest)
         # Set the latest version of clang
-        CLANG_PREBUILTS_VERSION := $(shell ls -d $(BUILD_TOP)/prebuilts/clang/host/$(HOST_OS)-x86/clang-r* | xargs -n 1 basename | tail -1)
+        CLANG_LATEST_CLANG_VERSION := $(shell ls -d $(BUILD_TOP)/prebuilts/clang/host/$(HOST_OS)-x86/clang-r* | xargs -n 1 basename | tail -1)
     else
         # Find the clang-* directory containing the specified version
-        CLANG_PREBUILTS_VERSION := clang-$(TARGET_CLANG_PREBUILTS_VERSION)
+        CLANG_LATEST_CLANG_VERSION := clang-$(TARGET_LATEST_CLANG_VERSION)
     endif
 else
-    # Use the default version of clang if TARGET_CLANG_PREBUILTS_VERSION hasn't been set by the device config
-    CLANG_PREBUILTS_VERSION := clang-r450784d
+    # Use the default version of clang if TARGET_CLANG_LATEST_CLANG_VERSION hasn't been set by the device config
+    CLANG_LATEST_CLANG_VERSION:= clang-$(LATEST_CLANG_VERSION)
 endif
 
-CLANG_PREBUILTS := $(BUILD_TOP)/prebuilts/clang/host/$(HOST_PREBUILT_TAG)/$(CLANG_PREBUILTS_VERSION)
+LATEST_CLANG_VERSION ?= $(shell find $(BUILD_TOP)/prebuilts/clang/host/$(HOST_PREBUILT_TAG)/clang-*[0-9]* -maxdepth 0 | tr '-' '\n' | tail -n1)
+CLANG_PREBUILTS := $(BUILD_TOP)/prebuilts/clang/host/$(HOST_PREBUILT_TAG)/clang-$(LATEST_CLANG_VERSION)
 
 ifeq ($(TARGET_CLANG_WITH_GNU_BINUTILS),true)
 # arm64 toolchain
