@@ -43,7 +43,7 @@ DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
 custom_local_manifest = ".repo/local_manifests/roomservice.xml"
-custom_default_revision = "crystal-12.1"
+custom_default_revision = "crystal-13.0"
 custom_dependencies = "crystal.dependencies"
 org_manifest = "CrystalOS-Devices"  # leave empty if org is provided in manifest
 org_display = "CrystalOS-Devices"  # needed for displaying
