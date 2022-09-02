@@ -24,6 +24,8 @@ CRYSTAL_DEVICE=$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)
 CRYSTAL_DATE_YEAR := $(shell date -u +%Y)
 CRYSTAL_DATE_MONTH := $(shell date -u +%m)
 CRYSTAL_DATE_DAY := $(shell date -u +%d)
+CRYSTAL_BUILD_HOUR := $(shell date -u +%H)
+CRYSTAL_BUILD_MINUTES := $(shell date -u +%M)
 
 CRYSTAL_BUILD_DATE := $(CRYSTAL_DATE_YEAR).$(CRYSTAL_DATE_MONTH).$(CRYSTAL_DATE_DAY)
 
